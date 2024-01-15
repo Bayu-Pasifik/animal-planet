@@ -1,6 +1,6 @@
 import 'package:animal_planet/app/constant/utils.dart';
-import 'package:animal_planet/app/data/models/animals.dart';
 import 'package:animal_planet/app/data/widgets/tabcontainer.dart';
+import 'package:animal_planet/app/data/widgets/tabcontent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -84,13 +84,15 @@ class HomeView extends GetView<HomeController> {
                       ]),
                   SizedBox(height: 10.h),
                   Expanded(
-                    child: Container(
+                    child: SizedBox(
                       width: Get.width,
                       height: MediaQuery.of(context).size.height,
                       // color: Colors.amber,
                       child: TabBarView(children: [
-                        Text("Mamalia"),
-                        Text("Reptil"),
+                        // Text("Mamalia"),
+                        TabbarContent(futureFunction: controller.getMamalia()),
+                        TabbarContent(futureFunction: controller.getReptile()),
+                        // Text("Reptil"),
                         Text("Ikan"),
                         Text("Burung"),
                         Text("Serangga"),

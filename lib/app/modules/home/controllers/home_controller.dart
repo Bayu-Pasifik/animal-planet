@@ -9,10 +9,11 @@ import 'package:http/http.dart' as http;
 class HomeController extends GetxController {
   var url = dotenv.env['BASE_URL_API']!;
   List<AnimalsModel> listmamalia = [];
+  List<AnimalsModel> listReptile = [];
+
   Future<List<AnimalsModel>> getMamalia() async {
     try {
       Uri uri = Uri.parse("$url?klasifikasi=Mamalia");
-      print(uri);
       var response = await http.get(uri);
       if (response.statusCode == 200) {
         var tempdata = json.decode(response.body)['data'];
@@ -20,10 +21,23 @@ class HomeController extends GetxController {
         listmamalia = List<AnimalsModel>.from(data);
       }
     } catch (e) {
-      // listMap = [];
       Get.snackbar("Error", e.toString());
     }
     return listmamalia;
+  }
+  Future<List<AnimalsModel>> getReptile() async {
+    try {
+      Uri uri = Uri.parse("$url?klasifikasi=Reptilia");
+      var response = await http.get(uri);
+      if (response.statusCode == 200) {
+        var tempdata = json.decode(response.body)['data'];
+        var data = tempdata.map((e) => AnimalsModel.fromJson(e));
+        listReptile = List<AnimalsModel>.from(data);
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+    return listReptile;
   }
 
   @override

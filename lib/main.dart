@@ -1,3 +1,4 @@
+import 'package:animal_planet/app/test_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,6 +10,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     ScreenUtilInit(
       designSize: const Size(360, 690),
@@ -18,6 +20,7 @@ void main() async {
         title: "Application",
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
+        // home: TestWidget(),
         debugShowCheckedModeBanner: false,
       ),
     ),
