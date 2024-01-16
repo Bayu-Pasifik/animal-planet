@@ -1,16 +1,15 @@
 import 'package:animal_planet/app/data/models/animals.dart';
+import 'package:animal_planet/app/routes/app_pages.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class TabbarContent extends StatelessWidget {
-  const TabbarContent({
-    super.key,
-    required this.futureFunction
-  });
-
+  const TabbarContent({super.key, required this.futureFunction,required this.detailTo});
 
   final Future futureFunction;
+  final String detailTo;
 
   @override
   Widget build(BuildContext context) {
@@ -40,55 +39,58 @@ class TabbarContent extends StatelessWidget {
                     "https://drive.google.com/uc?id=")
                 .replaceAll("file", "");
             // debugPrint(images);
-            return SizedBox(
-              width: 220.w,
-              height: 220.h,
-              // color: Colors.red,
-              child: Stack(
-                children: [
-                  SizedBox(
-                    width: 220.w,
-                    height: 220.h,
-                    child: CachedNetworkImage(
-                      imageUrl: images,
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.r),
-                          image: DecorationImage(
-                            image: imageProvider,
-                            fit: BoxFit.fitHeight,
+            return GestureDetector(
+              onTap: () => Get.toNamed(Routes.DETAIL_CONTENT) ,
+              child: SizedBox(
+                width: 220.w,
+                height: 220.h,
+                // color: Colors.red,
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      width: 220.w,
+                      height: 220.h,
+                      child: CachedNetworkImage(
+                        imageUrl: images,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.r),
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
+                        ),
+                        placeholder: (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            Image.asset("assets/images/Image_not_available.png"),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 20.h,
+                      left: 0,
+                      right: 0,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          width: 220.w,
+                          height: 20.h,
+                          color: Colors.grey.withOpacity(0.5),
+                          child: Text(
+                            "${animal.namaHewan}",
+                            style: TextStyle(
+                                fontFamily: "nunitoSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.sp,
+                                color: Colors.white,
+                                overflow: TextOverflow.ellipsis),
                           ),
                         ),
                       ),
-                      placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) =>
-                          Image.asset("assets/images/Image_not_available.png"),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 20.h,
-                    left: 0,
-                    right: 0,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        width: 220.w,
-                        height: 20.h,
-                        color: Colors.grey.withOpacity(0.5),
-                        child: Text(
-                          "${animal.namaHewan}",
-                          style: TextStyle(
-                              fontFamily: "nunitoSans",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.sp,
-                              color: Colors.white,
-                              overflow: TextOverflow.ellipsis),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

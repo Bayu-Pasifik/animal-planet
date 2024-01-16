@@ -90,8 +90,8 @@ class HomeView extends GetView<HomeController> {
                       // color: Colors.amber,
                       child: TabBarView(children: [
                         // Text("Mamalia"),
-                        TabbarContent(futureFunction: controller.getMamalia()),
-                        TabbarContent(futureFunction: controller.getReptile()),
+                        TabbarContent(futureFunction: controller.getMamalia(),detailTo: "mamalia"),
+                        TabbarContent(futureFunction: controller.getReptile(),detailTo: "reptile",),
                         // Text("Reptil"),
                         Text("Ikan"),
                         Text("Burung"),
