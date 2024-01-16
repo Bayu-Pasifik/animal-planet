@@ -10,6 +10,9 @@ class HomeController extends GetxController {
   var url = dotenv.env['BASE_URL_API']!;
   List<AnimalsModel> listmamalia = [];
   List<AnimalsModel> listReptile = [];
+  List<AnimalsModel> listPices = [];
+  List<AnimalsModel> listAves = [];
+  List<AnimalsModel> listInsect = [];
 
   Future<List<AnimalsModel>> getMamalia() async {
     try {
@@ -25,6 +28,7 @@ class HomeController extends GetxController {
     }
     return listmamalia;
   }
+
   Future<List<AnimalsModel>> getReptile() async {
     try {
       Uri uri = Uri.parse("$url?klasifikasi=Reptilia");
@@ -38,6 +42,51 @@ class HomeController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
     return listReptile;
+  }
+
+  Future<List<AnimalsModel>> getPices() async {
+    try {
+      Uri uri = Uri.parse("$url?klasifikasi=Pices");
+      var response = await http.get(uri);
+      if (response.statusCode == 200) {
+        var tempdata = json.decode(response.body)['data'];
+        var data = tempdata.map((e) => AnimalsModel.fromJson(e));
+        listPices = List<AnimalsModel>.from(data);
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+    return listPices;
+  }
+
+  Future<List<AnimalsModel>> getAves() async {
+    try {
+      Uri uri = Uri.parse("$url?klasifikasi=Aves");
+      var response = await http.get(uri);
+      if (response.statusCode == 200) {
+        var tempdata = json.decode(response.body)['data'];
+        var data = tempdata.map((e) => AnimalsModel.fromJson(e));
+        listAves = List<AnimalsModel>.from(data);
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+    return listAves;
+  }
+
+  Future<List<AnimalsModel>> getInsect() async {
+    try {
+      Uri uri = Uri.parse("$url?klasifikasi=Serangga");
+      var response = await http.get(uri);
+      if (response.statusCode == 200) {
+        var tempdata = json.decode(response.body)['data'];
+        var data = tempdata.map((e) => AnimalsModel.fromJson(e));
+        listInsect = List<AnimalsModel>.from(data);
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+    return listInsect;
   }
 
   @override

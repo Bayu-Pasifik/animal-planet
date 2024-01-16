@@ -28,6 +28,7 @@ class HomeView extends GetView<HomeController> {
                     "Selamat Datang... 👋",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(height: 10.h),
                   const Text(
                     "Temukan Hewan Kesukaanmu disini",
                     style: TextStyle(color: Colors.grey),
@@ -89,13 +90,11 @@ class HomeView extends GetView<HomeController> {
                       height: MediaQuery.of(context).size.height,
                       // color: Colors.amber,
                       child: TabBarView(children: [
-                        // Text("Mamalia"),
-                        TabbarContent(futureFunction: controller.getMamalia(),detailTo: "mamalia"),
-                        TabbarContent(futureFunction: controller.getReptile(),detailTo: "reptile",),
-                        // Text("Reptil"),
-                        Text("Ikan"),
-                        Text("Burung"),
-                        Text("Serangga"),
+                        TabbarContent(futureFunction: controller.getMamalia()),
+                        TabbarContent(futureFunction: controller.getReptile()),
+                        TabbarContent(futureFunction: controller.getPices()),
+                        TabbarContent(futureFunction: controller.getAves()),
+                        TabbarContent(futureFunction: controller.getInsect()),
                       ]),
                     ),
                   )

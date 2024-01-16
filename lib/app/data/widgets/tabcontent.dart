@@ -7,10 +7,9 @@ import 'package:get/get.dart';
 
 class TabbarContent extends StatelessWidget {
   const TabbarContent(
-      {super.key, required this.futureFunction, required this.detailTo});
+      {super.key, required this.futureFunction});
 
   final Future futureFunction;
-  final String detailTo;
 
   @override
   Widget build(BuildContext context) {
