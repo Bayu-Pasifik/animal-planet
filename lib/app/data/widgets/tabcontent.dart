@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class TabbarContent extends StatelessWidget {
-  const TabbarContent({super.key, required this.futureFunction,required this.detailTo});
+  const TabbarContent(
+      {super.key, required this.futureFunction, required this.detailTo});
 
   final Future futureFunction;
   final String detailTo;
@@ -40,7 +41,11 @@ class TabbarContent extends StatelessWidget {
                 .replaceAll("file", "");
             // debugPrint(images);
             return GestureDetector(
-              onTap: () => Get.toNamed(Routes.DETAIL_CONTENT) ,
+              onTap: () =>
+                  Get.toNamed(Routes.DETAIL_CONTENT, arguments: {
+                    "animal":animal,
+                    "images": images
+                    }),
               child: SizedBox(
                 width: 220.w,
                 height: 220.h,
@@ -63,8 +68,8 @@ class TabbarContent extends StatelessWidget {
                         ),
                         placeholder: (context, url) =>
                             const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) =>
-                            Image.asset("assets/images/Image_not_available.png"),
+                        errorWidget: (context, url, error) => Image.asset(
+                            "assets/images/Image_not_available.png"),
                       ),
                     ),
                     Positioned(
