@@ -4,10 +4,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TabbarContent extends StatelessWidget {
-  const TabbarContent(
-      {super.key, required this.futureFunction});
+  const TabbarContent({super.key, required this.futureFunction});
 
   final Future futureFunction;
 
@@ -17,8 +17,25 @@ class TabbarContent extends StatelessWidget {
       future: futureFunction,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return GridView.builder(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 1 / 1.6,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20),
+            itemBuilder: (context, index) => Shimmer.fromColors(
+                baseColor: Colors.grey[300]!,
+                highlightColor: Colors.white,
+                direction: ShimmerDirection.ltr,
+                child: Container(
+                  width: 220.w,
+                  height: 220.h,
+                  // color: Colors.amber,
+                  decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(9.r)),
+                )),
+            itemCount: 10,
           );
         }
         return GridView.builder(
@@ -40,11 +57,8 @@ class TabbarContent extends StatelessWidget {
                 .replaceAll("file", "");
             // debugPrint(images);
             return GestureDetector(
-              onTap: () =>
-                  Get.toNamed(Routes.DETAIL_CONTENT, arguments: {
-                    "animal":animal,
-                    "images": images
-                    }),
+              onTap: () => Get.toNamed(Routes.DETAIL_CONTENT,
+                  arguments: {"animal": animal, "images": images}),
               child: SizedBox(
                 width: 220.w,
                 height: 220.h,

@@ -54,15 +54,16 @@ class HomeView extends GetView<HomeController> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: SizedBox(
-                      width: 320.w,
+                      width: 360.w,
                       height: 70.h,
                       child: TextField(
                         readOnly: true,
                         onTap: () => Get.toNamed(Routes.SEARCH_CONTENT),
-                        decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(18.r)),
                             hintText: "Search",
-                            prefixIcon: Icon(Icons.search)),
+                            prefixIcon: const Icon(Icons.search)),
                       ),
                     ),
                   ),
