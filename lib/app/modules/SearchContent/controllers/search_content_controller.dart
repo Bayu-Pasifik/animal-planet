@@ -12,6 +12,7 @@ class SearchContentController extends GetxController {
   late TextEditingController searchController;
   var isSearch = false.obs;
   var notFound = "";
+  String emptyText = "";
   Future<List<AnimalsModel>> searchAnimal(String keyword) async {
     try {
       Uri uri = Uri.parse(url);
@@ -20,6 +21,7 @@ class SearchContentController extends GetxController {
         var tempdata = json.decode(response.body)['data'];
         var data = tempdata.map((e) => AnimalsModel.fromJson(e));
         listAnimal = List<AnimalsModel>.from(data);
+        listSearch.clear();
         var filterdList = listAnimal
             .where((element) =>
                 element.namaHewan != null &&
